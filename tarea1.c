@@ -42,7 +42,7 @@ void registrar_categorias(List *categorias) {
   CATEGORIAS *revisarDuplicados = list_first(categorias);
   while(revisarDuplicados != NULL){
     if (strcmp(revisarDuplicados->nombre, nombreNuevo) == 0){
-      printf("ya existe esa categoria");
+      printf("Ya existe esa categoria esa categoria\n");
       return;
     }
     revisarDuplicados = list_next(categorias);
@@ -50,7 +50,7 @@ void registrar_categorias(List *categorias) {
   CATEGORIAS *nueva = (CATEGORIAS*)malloc(sizeof(CATEGORIAS));
   strcpy(nueva->nombre, nombreNuevo);
   list_pushBack(categorias, nueva);
-  printf("categoria registrada");
+  printf("Categoria registrada correctam3nter\n");
 }
 
 void mostrar_categorias(List *categorias) {
@@ -59,7 +59,7 @@ void mostrar_categorias(List *categorias) {
   if(categorias == NULL)return;
   CATEGORIAS *actual = list_first(categorias);
   if (actual == NULL){
-    printf("debe registrar una categoria antes (opcion 1)\n");
+    printf("Debe registrar una categoria antes (opcion 1)\n");
     return;
   }
   while(actual != NULL){
@@ -70,6 +70,12 @@ void mostrar_categorias(List *categorias) {
 
 void eliminar_categoria(List *categorias, Queue *cola){
   char aEliminar[50];
+
+  if (list_first(categorias) == NULL || categorias == NULL){
+    printf("No existen categorias, porfavor ingrese una (opcion 1), o elija otra opcion\n");
+    return;
+  }
+  
   printf("Tarea a eliminar\n");
   scanf(" %s", aEliminar);
 
@@ -87,7 +93,7 @@ void eliminar_categoria(List *categorias, Queue *cola){
   }
   
   if (encontrado == 0){
-    printf("no existe categoria, ingre una nueva (opcion 1) o elige otra opcion\n");
+    printf("No existe esa categoria, ingrese una nueva (opcion 1), o elige otra opcion\n");
     return;
   }
 
@@ -102,7 +108,7 @@ void eliminar_categoria(List *categorias, Queue *cola){
   }
   free(catAeliminar);
   free(colaAux);
-  printf("lista y cola elimininada\n");
+  printf("Lista y cola elimininada\n");
 }
 
 
@@ -112,7 +118,8 @@ void registrar_pendiente(List *categorias, Queue *cola){
   scanf(" %s", nombreCategoria);
 
   if (list_first(categorias) == NULL){
-    printf("no hay categorias, ingresar (opcion 1)\n");
+    printf("No hay categorias, ingresar (opcion 1)\n");
+    return;
   }
   
   CATEGORIAS *categoriaActual = list_first(categorias);
@@ -155,7 +162,7 @@ void atender_siguiente(Queue *cola){
     return;
   }
   printf("objetivo: %s\n", tareaActual->objetivo);
-  printf("categoria: %s | hora: %s", tareaActual->categoria, tareaActual->fecha);
+  printf("categoria: %s | hora: %s\n", tareaActual->categoria, tareaActual->fecha);
   free(tareaActual);
   
 }
@@ -166,7 +173,7 @@ int main() {
   Queue *colaTareas = queue_create(NULL);
   do {
     mostrarMenuPrincipal();
-    printf("Ingrese su opción: ");
+    printf("Ingrese su opción: \n");
     scanf(" %c", &opcion); // Nota el espacio antes de %c para consumir el
                            // newline anterior
 
@@ -196,10 +203,10 @@ int main() {
       // Lógica para filtrar por categoría
       break;
     case '8':
-      puts("Saliendo del sistema de gestión hospitalaria...");
+      puts("Saliendo del sistema de gestión hospitalaria...\n");
       break;
     default:
-      puts("Opción no válida. Por favor, intente de nuevo.");
+      puts("Opción no válida. Por favor, intente de nuevo.\n");
     }
     presioneTeclaParaContinuar();
 
