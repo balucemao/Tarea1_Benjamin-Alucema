@@ -36,11 +36,14 @@ void mostrarMenuPrincipal() {
 
 void registrar_categorias(List *categorias) {
   printf("Registrar nueva categoría\n");
+  //nomre categoria nueva
   char nombreNuevo[50];
   scanf(" %s", nombreNuevo);
 
+  //variable auxiliar tipo CATEGORIAS para revisar si la categoria no se repite
   CATEGORIAS *revisarDuplicados = list_first(categorias);
   while(revisarDuplicados != NULL){
+    //se revisa la lista completa de categorias para ver si se repite alguna
     if (strcmp(revisarDuplicados->nombre, nombreNuevo) == 0){
       printf("Ya existe esa categoria\n");
       return;
@@ -48,6 +51,7 @@ void registrar_categorias(List *categorias) {
     revisarDuplicados = list_next(categorias);
   }
   CATEGORIAS *nueva = (CATEGORIAS*)malloc(sizeof(CATEGORIAS));
+  //se copia el nuevo nombre en la lista
   strcpy(nueva->nombre, nombreNuevo);
   list_pushBack(categorias, nueva);
   printf("Categoria registrada correctamente\n");
@@ -58,10 +62,12 @@ void mostrar_categorias(List *categorias) {
   printf("Categorías:\n");
   if(categorias == NULL)return;
   CATEGORIAS *actual = list_first(categorias);
+  //si no hay categorias en la lista
   if (actual == NULL){
     printf("Debe registrar una categoria antes (opcion 1)\n");
     return;
   }
+  //mientras la lista no este vacia se muestra las categorias
   while(actual != NULL){
     printf("%s\n", actual->nombre);
     actual = list_next(categorias);
@@ -70,7 +76,7 @@ void mostrar_categorias(List *categorias) {
 
 void eliminar_categoria(List *categorias, Queue *cola){
   char aEliminar[50];
-
+  //se revisa si la lista esta vacia o es nula
   if (list_first(categorias) == NULL || categorias == NULL){
     printf("No existen categorias, porfavor ingrese una (opcion 1), o elija otra opcion\n");
     return;
@@ -81,8 +87,10 @@ void eliminar_categoria(List *categorias, Queue *cola){
 
   CATEGORIAS *catAeliminar = list_first(categorias);
 
+  //si se encuentra la categoria a eliminar
   int encontrado = 0;
 
+  //buscar categoria a eliminar en la lista de categorias
   while (catAeliminar != NULL){
     if (strcmp(catAeliminar->nombre, aEliminar) == 0){
       list_popCurrent(categorias);
@@ -91,18 +99,22 @@ void eliminar_categoria(List *categorias, Queue *cola){
     }
     catAeliminar = list_next(categorias);
   }
-  
+
+  //si es que no existe la categoria
   if (encontrado == 0){
     printf("No existe esa categoria, ingrese una nueva (opcion 1) o elige otra opcion\n");
     return;
   }
 
+  //se crea cola para pasar las tareas que no pertenecen a la categoria buscada
   Queue *colaAux = queue_create(NULL);
+  //el ciclo busca todas las tareas coincidentes con la categoria, si coniciden la borra de la cola, sino la insertta al final de la cola auxiliar
   while(queue_front(cola) != NULL){
     TAREAS *t = queue_remove(cola);
     if (strcmp(t->categoria, aEliminar) == 0)free(t);
     else queue_insert(colaAux, t);
   }
+  //ciclo para devolver a la cola original en orden original
   while(queue_front(colaAux) != NULL){
     queue_insert(cola, queue_remove(colaAux));
   }
@@ -117,7 +129,8 @@ void registrar_pendiente(List *categorias, Queue *cola){
   printf("A que categoria pertenece la tarea?\n");
   scanf(" %s", nombreCategoria);
 
-  if (list_first(categorias) == NULL){
+  //se revisa si la lista esta vacia
+  if (list_first(categorias) == NULL || categorias == NULL){
     printf("No hay categorias, ingresar (opcion 1)\n");
     return;
   }
@@ -125,7 +138,8 @@ void registrar_pendiente(List *categorias, Queue *cola){
   CATEGORIAS *categoriaActual = list_first(categorias);
 
   int POSNULA = 0;
-  
+
+  //si existe en la lista de categorias la categoria ingresada por el usuario, se inserta una tarea en esa categoria.
   while(categoriaActual != NULL){
     if (strcmp(categoriaActual->nombre, nombreCategoria) == 0){
       POSNULA = 1;
@@ -133,24 +147,28 @@ void registrar_pendiente(List *categorias, Queue *cola){
     }
     categoriaActual = list_next(categorias);
   }
-
+  
+  //si no se encuentra entonces pide elegir otra opcion
   if (POSNULA == 0){
     printf("La categoria no existe, primero crear (opcion 1)\n");
     return;
   }
-  
+
+  //si existia la categoria entonces se crea variable de tipo tareas
   TAREAS *nuevaTarea = (TAREAS*)malloc(sizeof(TAREAS));
 
   if (nuevaTarea == NULL)return;
-  
+
+  //se le inserta la categoria seleccionada en la variable tipo tareas, despues se pide una tarea/objetivo que se requiere y se inserta en el objetivo de la variable tareas
   strcpy(nuevaTarea->categoria, nombreCategoria);
   printf("Cual es el objetivo de tu tarea?\n");
   scanf(" %[^\n]", nuevaTarea->objetivo);
 
+  //se pide la hora actual y se inserta en la nueva tarea
   time_t hora = time(NULL);
   struct tm *tm = localtime(&hora);
   strftime(nuevaTarea->fecha, 20, "%H:%M", tm);
-
+  //se inserta la nueva tarea en la cola de tareas
   queue_insert(cola, nuevaTarea);
 }
 
@@ -173,7 +191,7 @@ int main() {
   Queue *colaTareas = queue_create(NULL);
   do {
     mostrarMenuPrincipal();
-    printf("Ingrese su opción: \n");
+    printf("Ingrese su opción: ");
     scanf(" %c", &opcion); // Nota el espacio antes de %c para consumir el
                            // newline anterior
 
