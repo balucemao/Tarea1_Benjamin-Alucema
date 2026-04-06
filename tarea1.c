@@ -173,7 +173,7 @@ int main() {
   Queue *colaTareas = queue_create(NULL);
   do {
     mostrarMenuPrincipal();
-    printf("Ingrese su opción: ");
+    printf("Ingrese su opción: \n");
     scanf(" %c", &opcion); // Nota el espacio antes de %c para consumir el
                            // newline anterior
 
@@ -203,10 +203,10 @@ int main() {
       // Lógica para filtrar por categoría
       break;
     case '8':
-      puts("Saliendo del sistema de gestión hospitalaria...");
+      puts("Saliendo del sistema de gestión hospitalaria...\n");
       break;
     default:
-      puts("Opción no válida. Por favor, intente de nuevo.");
+      puts("Opción no válida. Por favor, intente de nuevo.\n");
     }
     presioneTeclaParaContinuar();
 
