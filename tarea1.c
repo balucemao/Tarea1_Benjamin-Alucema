@@ -148,13 +148,13 @@ void registrar_pendiente(List *categorias, Queue *cola){
     categoriaActual = list_next(categorias);
   }
   
-  //si no se encuentra entonces pide elegir otra opcion
+  //si no se encuentra entonces pide elegir otra opcion.
   if (POSNULA == 0){
     printf("La categoria no existe, primero crear (opcion 1)\n");
     return;
   }
 
-  //si existia la categoria entonces se crea variable de tipo tareas
+  //si existia la categoria entonces se crea variable de tipo tareas.
   TAREAS *nuevaTarea = (TAREAS*)malloc(sizeof(TAREAS));
 
   if (nuevaTarea == NULL)return;
