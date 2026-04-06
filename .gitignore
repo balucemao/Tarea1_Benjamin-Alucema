@@ -1,0 +1,9 @@
+#ejecutables
+tarea1
+a.out
+*.exe
+*.o
+
+# Archivos de configuración de Replit
+.replit
+replit.nix
