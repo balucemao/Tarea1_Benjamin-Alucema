@@ -5,6 +5,8 @@
 #include <stdlib.h>
 #include <string.h>
 #include <time.h>
+#include <ctype.h>
+
 
 typedef struct{
   char nombre[50];
@@ -34,12 +36,21 @@ void mostrarMenuPrincipal() {
   puts("8) Salir");
 }
 
+void aMayus(char *categoria){
+  for (int i = 0; categoria[i] != '\0'; i++){
+    categoria[i] = toupper((unsigned char)categoria[i]);
+  }
+}
+
 void registrar_categorias(List *categorias) {
-  printf("Registrar nueva categoría\n");
+  printf("Registrar nueva categoría (sin tildes o ñ)\n");
   //nomre categoria nueva
   char nombreNuevo[50];
   scanf(" %s", nombreNuevo);
 
+  //convertir a mayusculas para asegurar que no se repita categoria
+  aMayus(nombreNuevo);
+  
   //variable auxiliar tipo CATEGORIAS para revisar si la categoria no se repite
   CATEGORIAS *revisarDuplicados = list_first(categorias);
   while(revisarDuplicados != NULL){
@@ -85,6 +96,9 @@ void eliminar_categoria(List *categorias, Queue *cola){
   printf("Tarea a eliminar\n");
   scanf(" %s", aEliminar);
 
+  //convertir a mayusculas para asegurar que no se repita categoria
+  aMayus(aEliminar);
+  
   CATEGORIAS *catAeliminar = list_first(categorias);
 
   //si se encuentra la categoria a eliminar
@@ -129,6 +143,9 @@ void registrar_pendiente(List *categorias, Queue *cola){
   printf("A que categoria pertenece la tarea?\n");
   scanf(" %s", nombreCategoria);
 
+  //convertir a mayusculas para asegurar que no se repitan categorias
+  aMayus(nombreCategoria);
+  
   //se revisa si la lista esta vacia
   if (list_first(categorias) == NULL || categorias == NULL){
     printf("No hay categorias, ingresar (opcion 1)\n");
