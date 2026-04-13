@@ -1,14 +1,18 @@
+- Benjamin Alucema.
+- 22122629-1
+- 12-4-2026
+
 # SMART_TODO - PLANIFICADOR DINAMICO DE TAREAS
 
 Este proyecto consiste en una aplicacion/programa en el lenguaje C.
 Consiste en llevar un registro de tareas ordenadas en orden estricto de llegada, para lograr esto se utiliza el TDA cola cuya principal caracteristica es mantener su principio FIFO, el primero en entrar a la cola es el primero en salir.
 
-Otro punto a tener en consideracion del modo de funcionamiento es que estas tareas tienen etiquetas denominadas CATEGORIAS para identificarlas, por cada tarea ademas, se debe asignar la hora de ingreso al sistema de esta tarea y tambien el objetivo/accion que se requiere almacenar como tarea.
+Otro punto a tener en consideracion del modo de funcionamiento es que estas tareas tienen etiquetas denominadas CATEGORIAS (una lista tiene todas estas categorias), por cada tarea ademas, se debe asignar la hora de ingreso al sistema y tambien el objetivo/accion asignado a esta tarea. 
 
 # Para poder compilar este programa se deben tener instalados los archivos TDAs dentro de la carpeta (tdas), utilizados para poder hacer funcionar este codigo (en el programa que estas usando para compilar). 
-- Los archivos correspondientes son: extra.c, list.c, y queue.h.
-- Archivos para entender que hace cada funcion: extra.h y list.h. (En estos archivos viene explicado como funciona la logica de los TDAs usados en mi programa)
-- Archivo tarea1.c donde esta el codigo para que funcione la aplicacion
+- Los archivos correspondientes son: extra.c, list.c, y queue.h
+- Archivos para entender que hace cada funcion: extra.h y list.h. (En estos archivos viene explicado como funciona la logica de los TDAs usados en mi programa).
+- Archivo tarea1.c donde esta el codigo para que funcione la aplicacion.
 
 # Luego de tener ya instalado estos archivos necesitas ejecutar el siguiente comando en la terminal:
 
@@ -46,12 +50,13 @@ gcc tarea1.c tdas/*.c -o smart_todo
 
   - Usuario ingresa opcion 1, primera categoria HOGAR.
   - Usuario ingresa opcion 1 (nuevamente), segunda categoria COCINA.
-  - Usuario ingresa opcion 4, ingresa la tarea LAVAR PLATOS en la categoria HOGAR.
-  - Usuario ingresa opcion 4 (nuevamente), ingresa la tarea COCINAR CENA en la categoria COCINA.
-  - Usuario ingresa opcion 6, se visualiza el tablero general con la tarea LAVAR PLATOS y luego COCINAR CENA, ambas con hora exacta.
-  - Usuario ingresa opcion 5, se muestra la tarea en cabeza LAVAR PLATOS, esta se elimina y queda en cabeza de la cola COCINAR CENA.
+  - Usuario ingresa opcion 4, ingresa la categoria HOGAR y luego la tarea LAVAR.
+  - Usuario ingresa opcion 4 (nuevamente), ingresa la categoria COCINA y luego la tarea COCINAR.
+  - Usuario ingresa opcion 6, se visualiza el tablero general con la tarea LAVAR y luego COCINAR, ambas con hora exacta.
+  - Usuario ingresa opcion 5, se muestra la tarea en cabeza LAVAR, esta se elimina y queda en cabeza de la cola COCINAR.
   - Usuario ingresa opcion 7, ingresa la categoria HOGAR, se informara que ya no existen tareas en esa categoria.
   - Usuario ingresa opcion 3, se mostrara la categoria HOGAR Y COCINA.
   - Usuario ingresa opcion 2, ingresa la categoria HOGAR, se elimina del sistema.
   - Usuario ingresa opcion 3, se mostrar la categoria COCINA.
   - Usuario ingresa opcion 8, se sale del programa.
+

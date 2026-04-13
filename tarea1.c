@@ -222,14 +222,14 @@ void registrar_pendiente(List *categorias, Queue *cola){
   strftime(nuevaTarea->fecha, 20, "%H:%M:%S", tm);
   //se inserta la nueva tarea en la cola de tareas
   queue_insert(cola, nuevaTarea);
-  printf("Tarea registrada a las %s.\n", nuevaTarea->fecha);
+  printf("Tarea registrada a las %s.\n\n", nuevaTarea->fecha);
 }
 
 // 5- atender siguiente tarea, eliminarla y dejar la siguiente en cola
 void atender_siguiente(Queue *cola){
   TAREAS *tareaActual = queue_remove(cola);
   if (tareaActual == NULL){
-    printf("No hay pendientes.\n");
+    printf("No hay pendientes.\n\n");
     return;
   }
   printf("Objetivo: %s.\n", tareaActual->objetivo);
@@ -242,13 +242,13 @@ void atender_siguiente(Queue *cola){
 void mostrar_tablero(Queue *cola){
   //se revisa si existen tareas pendiente.
   if (queue_front(cola) == NULL){
-    printf("No existen tareas pendientes en el sistema\n");
+    printf("No existen tareas pendientes en el sistema\n\n");
     return;
   }
 
   //cola auxiliar
   Queue *colaAux = queue_create(NULL);
-  printf("TABLERO GENERAL (tareas en orden de llegada)\n");
+  printf("TABLERO GENERAL (tareas en orden de llegada)\n\n");
 
   //recorrer cola para enviar tareas a la auxiliar, mientras existan tareas
   while(queue_front(cola) != NULL){
@@ -271,19 +271,38 @@ void mostrar_tablero(Queue *cola){
 void filtrar_por_categoria(List *categorias, Queue *colaTareas){
   //se revisa si existen categorias en la lista de categorias
   if (list_first(categorias) == NULL || categorias == NULL){
-    printf("No hay categorias, ingresar otra opcion\n");
+    printf("No hay categorias, ingresar otra opcion\n\n");
     return;
   }
 
   //categoria para filtrar
   char catFiltrar[50];
-  printf("Ingrese la categoria para filtrar sus tarea derivadas\n");
+  printf("Ingrese la categoria para filtrar sus tarea derivadas\n\n");
   scanf(" %49[^\n]", catFiltrar);
   aMayus(catFiltrar); //categoria para filtrar a mayusculas
 
+  
+  CATEGORIAS *categoriaActual = list_first(categorias); //aqui se guarda la primera categoria de la lista de categorias
+  int POSNULA = 0; //variable que verifica si existe categoria
+  //aqui se recorrer la lista de categorias para saber si alguna coincide con la ingresada
+  while(categoriaActual != NULL){
+    if (strcmp(categoriaActual->nombre, catFiltrar) == 0){
+      POSNULA = 1;
+      break;
+    }
+    categoriaActual = list_next(categorias); //se recorre la lista de categorias
+  }
+
+  //si no se encuentra entonces pide elegir otra opcion.
+  if (POSNULA == 0){
+    printf("La categoria no existe, ingresar otra opcion.\n");
+    return;
+  }
+  
   Queue *colaAux = queue_create(NULL); //se crea cola auxiliar
-  int POSNULA = 0;
+  int hayTarea = 0;
   printf("Tareas en la categoria %s:\n\n", catFiltrar);
+  printf("---------------------------------------------\n\n");
 
   //mostrar tareas de esa categoria
   while(queue_front(colaTareas) != NULL){
@@ -292,14 +311,14 @@ void filtrar_por_categoria(List *categorias, Queue *colaTareas){
     TAREAS *tareaActual = queue_remove(colaTareas);
     if (strcmp(tareaActual->categoria, catFiltrar) == 0){
       printf("- %s (Registrada: %s)\n", tareaActual->objetivo, tareaActual->fecha);
-      POSNULA = 1;
+      hayTarea = 1;
     }
     //insertar tarea en la cola de tareas auxiliar
     queue_insert(colaAux, tareaActual);
   }
 
   //se verifica si existen tareas en la categoria
-  if(POSNULA == 0)printf("No existen tareas de esa categoria.\n");
+  if(hayTarea == 0)printf("No existen tareas de esa categoria.\n\n");
 
   //devolver cola original a su orden corrector FIFO
   while(queue_front(colaAux) != NULL){
