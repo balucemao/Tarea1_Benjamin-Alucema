@@ -10,9 +10,10 @@ Consiste en llevar un registro de tareas ordenadas en orden estricto de llegada,
 Otro punto a tener en consideracion del modo de funcionamiento es que estas tareas tienen etiquetas denominadas CATEGORIAS (una lista tiene todas estas categorias), por cada tarea ademas, se debe asignar la hora de ingreso al sistema y tambien el objetivo/accion asignado a esta tarea. 
 
 # Para poder compilar este programa se deben tener instalados los archivos TDAs dentro de la carpeta (tdas), utilizados para poder hacer funcionar este codigo (en el programa que estas usando para compilar). 
-- Los archivos correspondientes son: extra.c, list.c, y queue.h
-- Archivos para entender que hace cada funcion: extra.h y list.h. (En estos archivos viene explicado como funciona la logica de los TDAs usados en mi programa).
+- Los archivos TDAs correspondientes son: extra.c, list.c, y queue.h
+- Archivos para entender que hace cada funcion: extra.h y list.h. (En estos archivos viene explicado resumidamente como funciona la logica de los TDAs usados en mi programa).
 - Archivo tarea1.c donde esta el codigo para que funcione la aplicacion.
+- - ES IMPORTANTE QUE LOS ARCHIVOS TDAS ESTEN DENTRO DE LA CARPETA CON NOMBRE TDAS
 
 # Luego de tener ya instalado estos archivos necesitas ejecutar el siguiente comando en la terminal:
 
