@@ -45,7 +45,8 @@ gcc tarea1.c tdas/*.c -o smart_todo
 
 ## FUNCION(ES) SECUNDARIA
 
-- aMayus: convierte una cadena (palabra) en mayuscula, esto es util al ingresar las categorias, ya que quiza el usuario olvida como escribio la categoria, o tuvo un error, al convertir todo a mayuscula disminuye mucho el riesgo de un error de ese estilo. Por ejemplo hola = HOLA = HoLa = HOla
+- aMayus: convierte una cadena (palabra) en mayuscula, esto es util al ingresar las categorias, ya que quiza el usuario olvida como escribio la categoria, o tuvo un error, al convertir todo a mayuscula disminuye mucho el riesgo de un error de ese estilo. Por ejemplo hola = HOLA = HoLa = HOla.
+  Ademas esta funcion elimina todos los espacios luego de la ultima letra o numero, por ejemplo sin este borrado de espacios al final, benjamin != benjamin(aqui iria un       espacio)
 
 # EJEMPLO DE FUNCIONAMIENTO DEL PROGRAMA
 

@@ -36,10 +36,17 @@ void mostrarMenuPrincipal() {
   puts("8) Salir");
 }
 
-//funcion auxiliar, convierte cadena (plabra) a mayusculas
+//funcion auxiliar, convierte cadena (plabra) a mayusculas y elimina espacios al final
 void aMayus(char *categoria){
   for (int i = 0; categoria[i] != '\0'; i++){
     categoria[i] = toupper((unsigned char)categoria[i]);
+  }
+
+  //con esto elimino todos los espacios al final para ahorrar problemas de categorias repetidas
+  int n = strlen(categoria);
+  while (n > 0 && isspace((unsigned char)categoria[n-1])){
+    categoria[n-1] = '\0';
+    n -= 1;
   }
 }
 
